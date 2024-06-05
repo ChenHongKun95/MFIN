@@ -2,7 +2,7 @@
 from torch.utils.data import DataLoader
 from geoseg.losses import *
 from geoseg.datasets.potsdam_dataset import *
-from geoseg.xiaorong.MFIN import MFIN
+from geoseg.models.MFIN import MFIN
 from catalyst.contrib.nn import Lookahead
 from catalyst import utils
 # import os
