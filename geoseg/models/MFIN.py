@@ -161,6 +161,8 @@ class MAI(nn.Module):
     def __init__(self, channel):
         super(MAI, self).__init__()
         self.ms = Multi_scale(channel, channel)
+        self.sal_res = ChannelAttention(channel)
+        self.edg_res = ChannelAttention(channel)
         self.ca = ChannelAttention(channel)
         self.sa = SpatialAttention()
 
@@ -177,15 +179,18 @@ class MAI(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, sal, edg):
+        sal_res = self.sal_res(sal)
+        edg_res = self.edg_res(sal)
+        
         sal_r = self.ms(sal)
         sal_c = self.ca(sal_r) * sal_r
         sal_A = self.sa(sal_c) * sal_c
         edg_s = self.sigmoid(edg) * edg
+        
         edg_o = self.edg_conv(edg_s * sal_A)
-
         sal_o = self.sal_conv(torch.cat((sal_A, edg_s), 1))
 
-        return (sal + sal_o), (edg + edg_o)
+        return (sal_res + sal_o), (edg_res + edg_o)
 
 class Multi_scale(nn.Module):
     def __init__(self, in_channel, out_channel):
@@ -260,8 +265,8 @@ class SF(nn.Module):
         fs2 = fuse_weights2[0] * fsl 
         fh_2 = fuse_weights2[1] * fh 
 
-        fl = self.conv2(fsl1 * fl_1 + fl)
-        fh = self.conv1(fsl2* fh_2 + fh)
+        fl = self.conv2(fs1 * fl_1 + fl)
+        fh = self.conv1(fs2 * fh_2 + fh)
 
         out = self.S_conv(torch.cat((fh, fl), 1))
         return out
