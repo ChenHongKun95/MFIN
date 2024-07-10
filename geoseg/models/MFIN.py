@@ -362,7 +362,6 @@ class Decoder(nn.Module):
                  encoder_channels=(64, 128, 256, 512),
                  decode_channels=64,
                  dropout=0.1,
-                 window_size=8,
                  num_classes=6):
         super(Decoder, self).__init__()
 
@@ -543,7 +542,6 @@ class MFIN(nn.Module):
                  dropout=0.1,
                  backbone_name='swsl_resnet18',
                  pretrained=True,
-                 window_size=8,
                  num_classes=6
                  ):
         super().__init__()
@@ -553,7 +551,7 @@ class MFIN(nn.Module):
         
         encoder_channels = self.backbone.feature_info.channels()
 
-        self.decoder = Decoder(encoder_channels, decode_channels, dropout, window_size, num_classes)
+        self.decoder = Decoder(encoder_channels, decode_channels, dropout, num_classes)
 
     def forward(self, x):
         h, w = x.size()[-2:]
