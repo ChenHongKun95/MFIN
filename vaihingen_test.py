@@ -49,8 +49,9 @@ def img_writer(inp):
         cv2.imwrite(mask_name_png, mask_png)
 
 # config/vaihingen/unet.py
-#code/GeoSeg-main/config/vaihingen/deeplabv3.py
+# code/GeoSeg-main/config/vaihingen/deeplabv3.py
 # code/GeoSeg-main/config/vaihingen/pidnet.py
+# code/GeoSeg-main/config/vaihingen/unetformer.py
 
 # code/GeoSeg-main/config/vaihingen/mfin.py
 # code/GeoSeg-main/config/vaihingen/mfin_xr.py
@@ -58,13 +59,11 @@ def img_writer(inp):
 # code/GeoSeg-main/config/vaihingen/mfin_xr2.py
 # code/GeoSeg-main/config/vaihingen/mfin_xr3.py
 
-# code/GeoSeg-main/config/vaihingen/unetformer.py
-# ./config/vaihingen/sie_no_clutter.py
 def get_args():
     parser = argparse.ArgumentParser()
     arg = parser.add_argument
-    arg("-c", "--config_path", type=Path, default='./config/vaihingen/sie_no_clutter.py', help="Path to  config")
-    arg("-o", "--output_path", type=Path, help="Path where to save resulting masks.", default='./fig_results/vaihingen/050sie_no_clutter_lr')
+    arg("-c", "--config_path", type=Path, default='./config/vaihingen/mfin.py', help="Path to  config")
+    arg("-o", "--output_path", type=Path, help="Path where to save resulting masks.", default='./fig_results/vaihingen/mfin_lr')
     arg("-t", "--tta", help="Test time augmentation.", default='lr', choices=[None, "d4", "lr"])
     arg("--rgb", help="whether output rgb images", default=True, action='store_true')
     return parser.parse_args()
