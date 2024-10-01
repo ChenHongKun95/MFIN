@@ -276,11 +276,11 @@ class layer_fuse(nn.Module):
 
 class GlobalFeature(nn.Module):
     """
-    全局信息：由两部分组成 : 1.fc产生的全局信息；2.non-local方式的全局tezheng
+    Global feature
     """
     def __init__(self, in_channels, channles, reduction=8):
         super(GlobalFeature, self).__init__()
-        # ------------- fc 全局特征
+        # ------------- fc 
         self.avg_pool = nn.AdaptiveAvgPool2d(1)
         self.fc1 = nn.Sequential(
             nn.Linear(in_channels, in_channels//reduction),
@@ -302,7 +302,7 @@ class GlobalFeature(nn.Module):
 
     def forward(self, x):
         batch, channel, height, weight = x.size()
-        # -----------全局
+        # -----------global
         # [B, C*1*1]
         avg_pool = self.avg_pool(x).view(batch, channel)
         avg_feature = self.fc1(avg_pool).view(batch, channel, 1, 1)
