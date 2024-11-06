@@ -23,41 +23,11 @@ def seed_everything(seed):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = True
 
-# code/GeoSeg-main/config/vaihingen/unet.py
-# code/GeoSeg-main/config/vaihingen/deeplabv3.py
-# code/GeoSeg-main/config/vaihingen/pidnet.py
 
-# code/GeoSeg-main/config/vaihingen/mfin.py
-# code/GeoSeg-main/config/vaihingen/mfin_xr.py
-# code/GeoSeg-main/config/vaihingen/mfin_xr1.py
-# code/GeoSeg-main/config/vaihingen/mfin_xr2.py
-# code/GeoSeg-main/config/vaihingen/mfin_xr3.py
-#sie_no_clutter
-# code/GeoSeg-main/config/vaihingen/sie_no_clutter.py
-
-# code/GeoSeg-main/config/vaihingen/dcswin.py
-# code/GeoSeg-main/config/vaihingen/banet.py
-
-# code/GeoSeg-main/config/potsdam/abc.py
-# code/GeoSeg-main/config/potsdam/deeplabv3.py
-# code/GeoSeg-main/config/potsdam/pidnet.py
-
-# code/GeoSeg-main/config/loveda/dcswin.py  val small
-# code/GeoSeg-main/config/loveda/dcswin.py  val tiny
-
-# code/GeoSeg-main/config/uavid/dcswin.py    test tiny
-# code/GeoSeg-main/config/uavid/unetformer.py  val
-# code/GeoSeg-main/config/uavid/dcswin.py    val tiny
-
-
-# code/GeoSeg-main/config/potsdam/mfin_add_fim.py
-# code/GeoSeg-main/config/potsdam/mfin_add_fim_gfm.py
-# code/GeoSeg-main/config/potsdam/mfin_add_sf.py
-# code/GeoSeg-main/config/potsdam/mfin_add_gfm_sfm.py
 def get_args():
     parser = argparse.ArgumentParser()
     arg = parser.add_argument
-    arg("-c", "--config_path", type=Path, help="Path to the config.", default='./config/potsdam/mfin_add_gfm_sfm.py')
+    arg("-c", "--config_path", type=Path, help="Path to the config.", default='./config/potsdam/mfin.py')
     return parser.parse_args()
 
 
